@@ -42,6 +42,7 @@ public class PlayerCombat : CharacterCombat
             return;
         if (transform.localScale.x == 1)
         {
+        //checks the position of the player's mouse and records the position
             Vector3 rotation = playerCrosshair.transform.position - playerManager.playerCombat.gun.transform.parent.transform.position;
             float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
             playerManager.playerCombat.gun.transform.parent.rotation = Quaternion.Euler(0, 0, rot);
@@ -52,6 +53,7 @@ public class PlayerCombat : CharacterCombat
             float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
             playerManager.playerCombat.gun.transform.parent.rotation = Quaternion.Euler(0, 0, rot);
         }
+        //Checks to see if the player can fire their weapon and what audio to play
         if (Input.GetMouseButton(0) && canFire == true)
         {
             if (GameObject.Find("AudioManager").GetComponent<AudioManager>().gunFire != null)
@@ -78,7 +80,7 @@ public class PlayerCombat : CharacterCombat
         playerManager.playerStats.finalBulletDamage = playerManager.playerStats.damageTaken + playerManager.playerStats.baseBulletDamage;
         mousePosition = playerManager.mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
         playerCrosshair.transform.position = mousePosition;
-       
+       //checks to see if the player is aiming down
         if (Input.GetMouseButton(1))
         {
             playerManager.isAiming = true;
@@ -110,7 +112,7 @@ public class PlayerCombat : CharacterCombat
             playerCrosshair.sprite = HipFireCrosshair;
         }
     }
-
+//checks to see what bullet type the player is currently using and if "C" or "V" keys are pressed and see what bullets to change to.
     private void bulletCycle()
     {
         if (Input.GetKeyDown(KeyCode.V))
@@ -152,6 +154,7 @@ public class PlayerCombat : CharacterCombat
             playerManager.bulletType = BulletType.tracking;
         }
     }
+    //Checks to see what the current weapon the player is currently using and seeing if the "G" or "F" were pressed and what weapon to change too.
     private void weaponCycle()
     {
         if (Input.GetKeyDown(KeyCode.G))
