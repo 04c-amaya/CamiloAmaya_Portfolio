@@ -124,6 +124,7 @@ public class WaveSpawner : MonoBehaviour
             StartCoroutine(NextWaveTimer());
         }
     }
+    //Checks to see if the boss has been defeated and then destroys all enemies on the stage and loads a new stage
     public void bossDefeated()
     {
         // StartCoroutine(TextPopup(bossI));
@@ -146,13 +147,14 @@ public class WaveSpawner : MonoBehaviour
                 loadNewArena = false;
         }
     }
+    //countdown for the new wave
     IEnumerator NextWaveTimer()
     {
         Debug.Log("NextWaveTimer");
         yield return new WaitForSeconds(waitForNextWaveTimer);
         StartNextWave();
     }
-
+//Starts a new wave after all enemies have been defeated
     public void StartNextWave()
     {
         if (canSpawnEnemies==false && enemiesLeft.Length ==0)
@@ -164,6 +166,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
     }
+    //Controls the enemy spawns
     public void SpawnWave()
     {
         Debug.Log("SpawnWave");
@@ -185,6 +188,7 @@ public class WaveSpawner : MonoBehaviour
                 }
         }
     }
+    //Checks to see if the current wave is a boss wave and the if the boss is the final boss
     public void BossWave()
     {
         Debug.Log("BossWave");
@@ -252,6 +256,7 @@ public class WaveSpawner : MonoBehaviour
 
         }
     }
+    //Randomly load a different stage when boss is defeated
     public void GoToNewStage()
     {
         bossDead = false;
@@ -259,6 +264,7 @@ public class WaveSpawner : MonoBehaviour
         SceneManager.LoadScene(normalStages[i]);
         
     }
+    //clears all enemy spawn points when new area is loaded and then grabs that areas spawnpoints
     IEnumerator ClearAndGetNewSpawnPoints()
     {
         yield return new WaitForSeconds(2);
